@@ -1,0 +1,18 @@
+{
+  "name": "lambda-s3-image-resizer",
+  "version": "1.0.0",
+  "description": "aws lambda image resizer from s3 service",
+  "main": "index.js",
+  "scripts": {
+    "build:sharp": "[ -e node_modules/sharp/build/Release/sharp.node ] || docker run --rm -v $PWD:/data -w /data node:4 npm install sharp"
+  },
+  "author": "jayro salgado",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "lodash": "^4.17.4"
+  },
+  "engines": {
+    "node": "4.3.2"
+  }
+}

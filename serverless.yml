@@ -1,0 +1,34 @@
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: serverless-hello-world
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs4.3
+  region: us-west-1
+  role: arn:aws:iam::064855577434:role/lambda-s3-logger
+# The `functions` block defines what code to deploy
+functions:
+  helloWorld:
+    handler: handler.helloWorld
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: hello-world
+          method: get
+          cors: true
+  resizerFromBucket:
+    handler: resizer.fromBucket
+    events:
+      - s3:
+          bucket: not-nudes
+          event: s3:ObjectCreated:*
+          rules:
+              - prefix: myImages/incoming
+              - suffix: .jpg
